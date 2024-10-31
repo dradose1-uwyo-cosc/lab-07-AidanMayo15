@@ -1,8 +1,8 @@
-# Your Name Here
+# Aidan
 # UWYO COSC 1010
 # Submission Date
-# Lab XX
-# Lab Section: 
+# Lab 10
+# Lab Section: 12
 # Sources, people worked with, help given to: 
 # your
 # comments
@@ -17,8 +17,17 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
+num = input("Enter any positive number")
 factorial = 1
+print(f"Your input is{num}")
 
+if not num.isnumeric:
+    print("Please input a positive number")
+elif num == 0:
+    print("The factorial of 0 is 1")
+else:
+    for i in range(1, int(num) + 1):
+        factorial *= i
 print(f"The result of the factorial based on the given bound is {factorial}")
 
 print("*"*75)
@@ -38,6 +47,17 @@ print("*"*75)
 # The sum should start at 0 
 
 num_sum = 0 
+while True:
+    value = input("Enter an integer or type exit to finish")
+
+    if value.lower() == 'exit':
+        break
+    elif value[0] == '-':
+        num_sum += int(value)
+    elif value.isdigit():
+        num_sum += int(value)
+    else:
+        print("Please type a valid integer")
 
 print(f"Your final sum is {num_sum}")
 
@@ -59,4 +79,42 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-        
+while True:
+    user_input = input("Enter an Equation like '5 + 6' or type exit to finish: ").replace(" ", "")
+    if user_input.lower() == 'exit':
+        break
+
+    # Initialize variables inside the loop
+    operand1 = ""
+    operand2 = ""
+    operator = ""
+
+    # Check for the operator in the user input
+    for op in '+-*/%':
+        if op in user_input:
+            operator = op
+            operand1, operand2 = user_input.split(operator)
+            break
+    else:
+        print("Invalid input. Please enter a valid equation")
+        continue
+
+    # Check if both operands are digits
+    if operand1.isdigit() and operand2.isdigit():
+        operand1, operand2 = int(operand1), int(operand2)
+
+        # Perform the calculation based on the operator
+        if operator == '+':
+            result = operand1 + operand2
+        elif operator == '-':
+            result = operand1 - operand2
+        elif operator == '*':
+            result = operand1 * operand2
+        elif operator == '/':
+            result = operand1 / operand2 if operand2 != 0 else "Error: Division by zero"
+        elif operator == '%':
+            result = operand1 % operand2
+
+        print(f"The result of {operand1} {operator} {operand2} is: {result}")
+    else:
+        print("Invalid equation. Both operands must be positive numbers")
